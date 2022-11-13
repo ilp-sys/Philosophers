@@ -6,7 +6,7 @@
 #    By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/13 14:17:39 by jiwahn            #+#    #+#              #
-#    Updated: 2022/11/13 14:58:37 by jiwahn           ###   ########.fr        #
+#    Updated: 2022/11/13 16:38:50 by jiwahn           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 #
@@ -18,7 +18,13 @@ CFLAGS  		:= -Wall -Wextra -Werror
 RM				:= rm
 RMFLAGS 		:= -rf
 
-SRCS 			:= main.c
+SRCS 			:= main.c \
+				   cs_hdlr.c \
+				   printer.c \
+				   routine.c \
+				   timer.c \
+				   utils.c \
+				   set_table.c
 
 OBJDIR			:= ./obj/
 OBJNAME			:= $(SRCS:.c=.o)

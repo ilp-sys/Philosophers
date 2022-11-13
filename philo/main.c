@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 14:18:52 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/11/13 14:51:00 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/11/13 16:47:34 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,14 @@ static void	get_input(t_input *input, int argc, char *argv[])
 
 static void	clean_up(t_collector *clct)
 {
+	int	i;
+
+	i = 0;
+	while (i < clct->input->philo_num)
+	{
+		pthread_join(*clct->table->philo[i], NULL);
+		i++;
+	}
 }
 
 int	main(int argc, char *argv[])

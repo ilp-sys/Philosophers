@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 14:19:39 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/11/13 14:52:04 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/11/13 17:08:32 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ enum	e_fork
 
 enum	e_state
 {
-	ALIVE = 0,
-	DEAD,
+	DEAD = 0,
 	SLEEP,
 	THINK,
 	EAT,
@@ -62,9 +61,12 @@ typedef struct s_input
 
 typedef struct s_printer
 {
+	int				ate_all;
 	int				*eat_cnt;
-	struct timeval	*last_eat;
+	struct timeval	start_time;
+	struct timeval	**last_eat;
 	pthread_mutex_t	*print_mut;
+	pthread_mutex_t	*ate_all_mut;
 }t_printer;
 
 typedef struct s_table
@@ -82,7 +84,6 @@ typedef struct s_collector
 	t_input			*input;
 	t_table			*table;
 	t_printer		*printer;
-	struct timeval	start_time;
 }t_collector;
 
 //main.c
@@ -94,18 +95,22 @@ int			ft_atoi(const char *str);
 //set_table.c
 void		set_table(t_collector *clct, t_printer *printer, t_table *table, t_input *input);
 
-//rputine.c
-void		*routine(void *t_collector);
+//routine.c
+void		*routine(void *arg);
 
 //cs_hdlr.c
 void		set_table_flag(t_table *table, int stat);
 int			check_table_flag(t_table *table, int stat);
+void		add_ate_all(t_printer *printer);
+int			check_ate_all(t_printer *printer, int num);
 
 //tiemr.c
 void		timer(int elapse);
 long long	get_elapsed(struct timeval since);
 
 //printer.c
-void		print_msg(t_collector clct, int stat);
+int			printer(t_collector *clct, int stat);
+void		add_ate_all(t_printer *printer);
+int			check_ate_all(t_printer *printer, int num);
 
 #endif

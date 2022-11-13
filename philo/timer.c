@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 14:38:45 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/11/13 14:51:27 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/11/13 15:46:18 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	timer(int elapse)
 {
 	struct timeval	start;
 
-	if (elapse)
+	if (elapse > 0)
 	{
 		gettimeofday(&start, NULL);
 		while (1)
