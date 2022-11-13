@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 15:03:38 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/11/13 18:01:25 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/11/13 18:15:39 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ void		*routine(void *arg)
 			break ;
 		if (philo_think(clct, time_think))
 			break ;
+		usleep(5);
 	}
 	set_table_flag(clct.table, PAUSE);
 	return (NULL);
