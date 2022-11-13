@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 14:18:52 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/11/13 18:39:13 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/11/13 19:06:38 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,13 @@ static void	clean_up(t_collector *clct)
 		pthread_mutex_destroy(clct->table->fork_mut[i++]);
 }
 
+static int	handle_one_philo(t_input *input)
+{
+	printf("%d %d %s\n", 0, 1, FORK_MSG);
+	printf("%d %d %s\n", input->time_die, 1, FORK_MSG);
+	return (EXIT_FAILURE);
+}
+
 int	main(int argc, char *argv[])
 {
 	t_input		input;
@@ -66,6 +73,8 @@ int	main(int argc, char *argv[])
 		write(STDERR_FILENO, "Wrong Input!\n", 14);
 		return (EXIT_FAILURE);
 	}
+	if (input.philo_num == 1)
+		return (handle_one_philo(&input));
 	set_table(&clct, &printer, &table, &input);
 	while (check_table_flag(&table, RUN))
 		;

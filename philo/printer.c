@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 14:49:30 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/11/13 18:33:12 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/11/13 19:07:01 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	print_msg(t_printer *printer, int self, int stat)
 {
 	const struct timeval	start_time = printer->start_time;
 
+	self += 1;
 	pthread_mutex_lock(printer->print_mut);
 	if (stat == FORK)
 		printf("%lld %d %s\n", get_elapsed(start_time), self, FORK_MSG);
