@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 14:18:52 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/11/13 16:47:34 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/11/13 18:39:13 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,13 @@ static void	clean_up(t_collector *clct)
 
 	i = 0;
 	while (i < clct->input->philo_num)
-	{
-		pthread_join(*clct->table->philo[i], NULL);
-		i++;
-	}
+		pthread_join(*clct->table->philo[i++], NULL);
+	pthread_mutex_destroy(clct->printer->print_mut);
+	pthread_mutex_destroy(clct->printer->ate_all_mut);
+	pthread_mutex_destroy(clct->table->flag_mut);
+	i = 0;
+	while (i < clct->input->philo_num)
+		pthread_mutex_destroy(clct->table->fork_mut[i++]);
 }
 
 int	main(int argc, char *argv[])

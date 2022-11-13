@@ -6,7 +6,7 @@
 #    By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/13 14:17:39 by jiwahn            #+#    #+#              #
-#    Updated: 2022/11/13 18:08:42 by jiwahn           ###   ########.fr        #
+#    Updated: 2022/11/13 18:49:01 by jiwahn           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 #
@@ -24,7 +24,8 @@ SRCS 			:= main.c \
 				   routine.c \
 				   timer.c \
 				   utils.c \
-				   set_table.c
+				   set_table.c \
+				   fork_hdlr.c
 
 OBJDIR			:= ./obj/
 OBJNAME			:= $(SRCS:.c=.o)

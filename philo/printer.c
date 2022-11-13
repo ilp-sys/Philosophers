@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 14:49:30 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/11/13 17:06:15 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/11/13 18:33:12 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int	printer(t_collector *clct, int stat)
 		return (1);
 	if (stat == EAT)
 	{
-		if (get_elapsed(*clct->printer->last_eat[clct->self]) > clct->input->time_die)
+		if (get_elapsed(*clct->printer->last_eat[clct->self]) > \
+				clct->input->time_die)
 		{
 			stat = DEAD ;
 			print_msg(clct->printer, clct->self, stat);

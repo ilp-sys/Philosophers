@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 14:19:39 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/11/13 17:08:32 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/11/13 18:49:40 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,8 @@ int			main(int argc, char *argv[]);
 int			ft_atoi(const char *str);
 
 //set_table.c
-void		set_table(t_collector *clct, t_printer *printer, t_table *table, t_input *input);
+void		set_table(t_collector *clct, t_printer *printer, \
+		t_table *table, t_input *input);
 
 //routine.c
 void		*routine(void *arg);
@@ -103,6 +104,10 @@ void		set_table_flag(t_table *table, int stat);
 int			check_table_flag(t_table *table, int stat);
 void		add_ate_all(t_printer *printer);
 int			check_ate_all(t_printer *printer, int num);
+
+//fork_hdlr.c
+void		pick_fork_up(t_table *table, int pos, char *flag, int flag_op);
+void		put_fork_down(t_table *table, int pos, char *flag, int flag_op);
 
 //tiemr.c
 void		timer(int elapse);
