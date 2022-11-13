@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 14:18:52 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/11/13 19:06:38 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/11/13 19:08:35 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	clean_up(t_collector *clct)
 static int	handle_one_philo(t_input *input)
 {
 	printf("%d %d %s\n", 0, 1, FORK_MSG);
-	printf("%d %d %s\n", input->time_die, 1, FORK_MSG);
+	printf("%d %d %s\n", input->time_die, 1, DEAD_MSG);
 	return (EXIT_FAILURE);
 }
 
