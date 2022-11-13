@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 15:03:38 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/11/13 17:07:50 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/11/13 18:01:25 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,32 @@ static int	philo_eat(t_collector clct, int time_eat)
 
 	flag = 0;
 	while (!(flag & L_FORK))
+	{
 		pick_fork_up(clct.table, lpos, &flag, L_FORK);
+		usleep(1);
+	}
 	if (printer(&clct, FORK))
 		return (1);
 	while (!(flag & R_FORK))
+	{
 		pick_fork_up(clct.table, rpos, &flag, R_FORK);
+		usleep(1);
+	}
 	if (printer(&clct, FORK))
 		return (1);
 	if (printer(&clct, EAT))
 		return (1);
 	timer(time_eat);
 	while (flag & L_FORK)
+	{
 		put_fork_down(clct.table, lpos, &flag, L_FORK);
+		usleep(1);
+	}
 	while (flag & R_FORK)
+	{
 		put_fork_down(clct.table, rpos, &flag, R_FORK);
+		usleep(1);
+	}
 	return (0);
 }
 
@@ -90,8 +102,8 @@ void		*routine(void *arg)
 		;
 	if (clct.self % 2)
 		timer(time_think);
-//	if (input->philo_num % 2 == 0)
-//		time_think = 0;
+	if (input->philo_num % 2 == 0)
+		time_think = 0;
 	while (1)
 	{
 		if (philo_eat(clct, input->time_eat))
