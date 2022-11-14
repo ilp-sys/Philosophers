@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 15:03:38 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/11/13 18:55:54 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/11/14 14:23:06 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	philo_think(t_collector clct, int time_think)
 static void	pre_routine(t_collector clct, t_input *input, int *time_think)
 {
 	*time_think = (input->time_die - input->time_eat - input->time_sleep) / 2;
-	if (*time_think < 0)
+	if (*time_think <= 0)
 		*time_think = 5;
 	while (check_table_flag(clct.table, PAUSE))
 		;
