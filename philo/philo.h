@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 14:19:39 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/11/14 15:58:57 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/11/14 22:21:51 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,5 +118,6 @@ long long	get_elapsed(struct timeval since);
 //printer.c
 int			printer(t_collector *clct, int stat);
 void		print_msg(t_printer *printer, int self, int stat);
+int			printer_fork(t_collector *clct, int stat, int pos);
 
 #endif

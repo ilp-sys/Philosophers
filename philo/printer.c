@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 14:49:30 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/11/14 16:21:48 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/11/14 22:21:24 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,21 @@ void	print_msg(t_printer *printer, int self, int stat)
 int	printer(t_collector *clct, int stat)
 {
 	if (check_table_flag(clct->table, PAUSE))
+	{
+			put_fork_down(clct->table, clct->self, NULL, 0);
+			put_fork_down(clct->table, (clct->self + 1) % \
+					clct->input->philo_num, NULL, 0);
 		return (1);
+	}
 	if (stat == EAT)
 	{
 		if (get_elapsed(*clct->printer->last_eat[clct->self]) > \
 				clct->input->time_die)
 		{
 			stat = DEAD ;
+			put_fork_down(clct->table, clct->self, NULL, 0);
+			put_fork_down(clct->table, (clct->self + 1) % \
+					clct->input->philo_num, NULL, 0);
 			print_msg(clct->printer, clct->self, stat);
 			return (1);
 		}
@@ -52,5 +60,18 @@ int	printer(t_collector *clct, int stat)
 	}
 	else
 		print_msg(clct->printer, clct->self, stat);
+	return (0);
+}
+
+int	printer_fork(t_collector *clct, int stat, int pos)
+{
+	if (check_table_flag(clct->table, PAUSE))
+	{
+		put_fork_down(clct->table, clct->self, NULL, 0);
+		if (pos == R_FORK)
+			put_fork_down(clct->table, (clct->self + 1) % clct->input->philo_num, NULL, 0);
+		return (1);
+	}
+	print_msg(clct->printer, clct->self, stat);
 	return (0);
 }
