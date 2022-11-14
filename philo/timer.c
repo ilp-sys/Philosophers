@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 14:38:45 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/11/14 18:39:29 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/11/14 19:55:02 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ int	timer_routine(t_collector clct, int elapse)
 				return (0);
 			else if (elp >= clct.input->time_die)
 			{
-				put_fork_down(clct.table, clct.self, NULL, L_FORK);
+				put_fork_down(clct.table, clct.self, NULL, 0);
 				put_fork_down(clct.table, (clct.self + 1) % \
-						clct.input->philo_num, NULL, L_FORK);
+						clct.input->philo_num, NULL, 0);
 				print_msg(clct.printer, clct.self, DEAD);
 				return (1);
 			}
