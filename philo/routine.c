@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 15:03:38 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/11/14 16:41:54 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/11/14 18:42:07 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	philo_sleep(t_collector clct, int time_sleep)
 	if (printer(&clct, SLEEP))
 		return (1);
 	if (timer_routine(clct, time_sleep))
-			return (1);
+		return (1);
 	return (0);
 }
 
@@ -89,7 +89,6 @@ void	*routine(void *arg)
 			break ;
 		if (philo_think(clct, time_think))
 			break ;
-		//usleep(5);
 	}
 	set_table_flag(clct.table, PAUSE);
 	return (NULL);
