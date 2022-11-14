@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 15:03:38 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/11/14 14:23:06 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/11/14 16:41:54 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,21 @@ static int	philo_eat(t_collector clct, int time_eat)
 
 	flag = 0;
 	while (!(flag & L_FORK))
-		(pick_fork_up(clct.table, lpos, &flag, L_FORK), usleep(1));
+		(pick_fork_up(clct.table, lpos, &flag, L_FORK), usleep(10));
 	if (printer(&clct, FORK))
 		return (1);
 	while (!(flag & R_FORK))
-		(pick_fork_up(clct.table, rpos, &flag, R_FORK), usleep(1));
+		(pick_fork_up(clct.table, rpos, &flag, R_FORK), usleep(10));
 	if (printer(&clct, FORK))
 		return (1);
 	if (printer(&clct, EAT))
 		return (1);
-	timer(time_eat);
+	if (timer_routine(clct, time_eat))
+		return (1);
 	while (flag & L_FORK)
-		(put_fork_down(clct.table, lpos, &flag, L_FORK), usleep(1));
+		(put_fork_down(clct.table, lpos, &flag, L_FORK), usleep(10));
 	while (flag & R_FORK)
-		(put_fork_down(clct.table, rpos, &flag, R_FORK), usleep(1));
+		(put_fork_down(clct.table, rpos, &flag, R_FORK), usleep(10));
 	return (0);
 }
 
@@ -41,7 +42,8 @@ static int	philo_sleep(t_collector clct, int time_sleep)
 {
 	if (printer(&clct, SLEEP))
 		return (1);
-	timer(time_sleep);
+	if (timer_routine(clct, time_sleep))
+			return (1);
 	return (0);
 }
 
@@ -49,7 +51,8 @@ static int	philo_think(t_collector clct, int time_think)
 {
 	if (printer(&clct, THINK))
 		return (1);
-	timer(time_think);
+	if (timer_routine(clct, time_think))
+		return (1);
 	return (0);
 }
 
@@ -61,7 +64,7 @@ static void	pre_routine(t_collector clct, t_input *input, int *time_think)
 	while (check_table_flag(clct.table, PAUSE))
 		;
 	if (clct.self % 2)
-		timer(*time_think);
+		timer_routine(clct, *time_think);
 	if (input->philo_num % 2 == 0)
 		*time_think = 0;
 }
@@ -86,7 +89,7 @@ void	*routine(void *arg)
 			break ;
 		if (philo_think(clct, time_think))
 			break ;
-		usleep(5);
+		//usleep(5);
 	}
 	set_table_flag(clct.table, PAUSE);
 	return (NULL);

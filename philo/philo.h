@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 14:19:39 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/11/13 19:01:08 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/11/14 15:58:57 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,10 +110,13 @@ void		pick_fork_up(t_table *table, int pos, char *flag, int flag_op);
 void		put_fork_down(t_table *table, int pos, char *flag, int flag_op);
 
 //tiemr.c
+//void		timer(int elapse);
 void		timer(int elapse);
+int			timer_routine(t_collector clct, int elapse);
 long long	get_elapsed(struct timeval since);
 
 //printer.c
 int			printer(t_collector *clct, int stat);
+void		print_msg(t_printer *printer, int self, int stat);
 
 #endif
