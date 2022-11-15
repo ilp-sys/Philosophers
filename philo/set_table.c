@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 14:57:59 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/11/13 18:47:29 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/11/15 15:11:39 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ void	set_table(
 	init_printer(printer, input);
 	init_table(clct, table, input);
 	gettimeofday(&printer->start_time, NULL);
-	set_table_flag(table, RUN);
 	i = 0;
 	while (i < input->philo_num)
 		gettimeofday(printer->last_eat[i++], NULL);
+	set_table_flag(table, RUN);
 }

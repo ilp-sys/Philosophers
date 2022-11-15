@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 14:49:30 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/11/14 22:21:24 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/11/15 16:15:58 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,18 @@ void	print_msg(t_printer *printer, int self, int stat)
 	pthread_mutex_unlock(printer->print_mut);
 }
 
+static void	put_forks_down(t_collector *clct)
+{
+		put_fork_down(clct->table, clct->self, NULL, 0);
+		put_fork_down(clct->table, (clct->self + 1) % \
+					clct->input->philo_num, NULL, 0);
+}
+
 int	printer(t_collector *clct, int stat)
 {
 	if (check_table_flag(clct->table, PAUSE))
 	{
-			put_fork_down(clct->table, clct->self, NULL, 0);
-			put_fork_down(clct->table, (clct->self + 1) % \
-					clct->input->philo_num, NULL, 0);
+		put_forks_down(clct);
 		return (1);
 	}
 	if (stat == EAT)
@@ -45,11 +50,8 @@ int	printer(t_collector *clct, int stat)
 		if (get_elapsed(*clct->printer->last_eat[clct->self]) > \
 				clct->input->time_die)
 		{
-			stat = DEAD ;
-			put_fork_down(clct->table, clct->self, NULL, 0);
-			put_fork_down(clct->table, (clct->self + 1) % \
-					clct->input->philo_num, NULL, 0);
-			print_msg(clct->printer, clct->self, stat);
+			put_forks_down(clct);
+			print_msg(clct->printer, clct->self, DEAD);
 			return (1);
 		}
 		gettimeofday(clct->printer->last_eat[clct->self], NULL);
@@ -69,7 +71,8 @@ int	printer_fork(t_collector *clct, int stat, int pos)
 	{
 		put_fork_down(clct->table, clct->self, NULL, 0);
 		if (pos == R_FORK)
-			put_fork_down(clct->table, (clct->self + 1) % clct->input->philo_num, NULL, 0);
+			put_fork_down(clct->table, (clct->self + 1) % \
+					clct->input->philo_num, NULL, 0);
 		return (1);
 	}
 	print_msg(clct->printer, clct->self, stat);

@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 14:18:52 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/11/14 16:01:45 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/11/15 16:11:50 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	main(int argc, char *argv[])
 		return (handle_one_philo(&input));
 	set_table(&clct, &printer, &table, &input);
 	while (check_table_flag(&table, RUN))
-		;
+		usleep(10);
 	clean_up(&clct);
 	return (EXIT_SUCCESS);
 }

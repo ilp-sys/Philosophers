@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 15:03:38 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/11/14 22:21:32 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/11/15 16:10:50 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,21 @@ static int	philo_eat(t_collector clct, int time_eat)
 
 	flag = 0;
 	while (!(flag & L_FORK))
-		(pick_fork_up(clct.table, lpos, &flag, L_FORK), usleep(10));
+		(pick_fork_up(clct.table, lpos, &flag, L_FORK), usleep(100));
 	if (printer_fork(&clct, FORK, L_FORK))
 		return (1);
 	while (!(flag & R_FORK))
-		(pick_fork_up(clct.table, rpos, &flag, R_FORK), usleep(10));
+		(pick_fork_up(clct.table, rpos, &flag, R_FORK), usleep(100));
 	if (printer_fork(&clct, FORK, R_FORK))
 		return (1);
 	if (printer(&clct, EAT))
 		return (1);
 	if (timer_routine(clct, time_eat))
 		return (1);
-	while (flag & L_FORK)
-		(put_fork_down(clct.table, lpos, &flag, L_FORK), usleep(5));
-	while (flag & R_FORK)
-		(put_fork_down(clct.table, rpos, &flag, R_FORK), usleep(5));
+	while (flag & L_FORK && check_table_flag(clct.table, RUN))
+		(put_fork_down(clct.table, lpos, &flag, L_FORK), usleep(1));
+	while (flag & R_FORK && check_table_flag(clct.table, RUN))
+		(put_fork_down(clct.table, rpos, &flag, R_FORK), usleep(1));
 	return (0);
 }
 
@@ -89,7 +89,7 @@ void	*routine(void *arg)
 			break ;
 		if (philo_think(clct, time_think))
 			break ;
-		usleep(5);
+		usleep(10);
 	}
 	set_table_flag(clct.table, PAUSE);
 	return (NULL);
